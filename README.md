@@ -1,28 +1,36 @@
-# Cecha
+# cecha
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cecha`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+cecha is "Check ELB Certificate Hash Algorithm" command.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'cecha'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+install it yourself as:
 
     $ gem install cecha
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+Commands:
+  cecha help [COMMAND]  # Describe available commands or one specific command
+  cecha list            # show elb certificate list
+
+Options:
+  p, [--profile=PROFILE]                                   # Load credentials by profile name from shared credentials file.
+  k, [--access-key-id=ACCESS_KEY_ID]                       # AWS access key id.
+  s, [--secret-access-key=SECRET_ACCESS_KEY]               # AWS secret access key.
+  r, [--region=REGION]                                     # AWS region.
+     [--shared-credentials-path=SHARED_CREDENTIALS_PATH]   # AWS shared credentials path.
+  v, [--verbose], [--no-verbose]
+```
+
+## Example
+
+```
+$ cecha list
+012345678901	us-east-1	production-elb	443	prod.example.com	sha1WithRSAEncryption
+012345678901	ap-northeast-1	development-elb	443	dev.example.com	sha256WithRSAEncryption
+```
 
 ## Development
 
