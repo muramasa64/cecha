@@ -1,2 +1,2 @@
 require "cecha/version"
-require "cecha/CLI"
+require "cecha/cli"
