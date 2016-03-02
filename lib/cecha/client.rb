@@ -12,7 +12,8 @@ module Cecha
       :elb_name,
       :elb_port,
       :ssl_certificate_name,
-      :signature_algorithm
+      :signature_algorithm,
+      :policy_names
     ) do
       def to_s
         values.join("\t")
@@ -36,6 +37,7 @@ module Cecha
         resp = @elasticloadbalancing.client.describe_load_balancers
         resp.load_balancer_descriptions.each do |elb|
           elb.listener_descriptions.each do |desc|
+            p desc
             cert = ssl_certificate(desc.listener.ssl_certificate_id)
             if cert
               elbcert = ElbCert.new
@@ -43,6 +45,7 @@ module Cecha
               elbcert.region = @region
               elbcert.elb_name = elb.load_balancer_name
               elbcert.elb_port = desc.listener.load_balancer_port
+              elbcert.policy_names = desc.policy_names.join(',')
               elbcert.ssl_certificate_name = cert.name
               elbcert.signature_algorithm = OpenSSL::X509::Certificate.new(cert.certificate_body).signature_algorithm
               certlist << elbcert
